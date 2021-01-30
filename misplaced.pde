@@ -1,10 +1,14 @@
 PVector center;
 ArrayList<Island> islands = generate_islands(30, 1000);
 
-void setup () {
+void settings () {
   size(1200, 800, P2D);
-  center = new PVector(width/2, height/2);
   frameRate(60);
+  imageMode(CENTER);
+}
+
+void setup () {
+  center = new PVector(width/2, height/2);
 }
 
 void draw () {
@@ -12,5 +16,4 @@ void draw () {
   render_islands(islands);
   player.update();
   player.render();
-  
 }
