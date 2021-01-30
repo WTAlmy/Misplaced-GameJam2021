@@ -29,7 +29,8 @@ public abstract class Plottable {
   }
   
   public PVector getRelativePos () {
-    return this.pos.copy();
+    PVector delta = player.getPosition().sub(this.pos);
+    return center.copy().sub(delta);
   }
   
   // Modifier Functions
