@@ -3,22 +3,26 @@ ArrayList<Resource> resources = new ArrayList<Resource>();
 public class Resource {
   
   private String name;
+  private int count;
   private PImage loadedImage;
   private ArrayList<ResourceInstance> instances;
   
   Resource (String name) {
     this.name = name;
+    this.count = 0;
     this.instances = new ArrayList<ResourceInstance>();
   }
   
   Resource (String name, String imagePath) {
     this.name = name;
+    this.count = 0;
     this.loadedImage = loadImage(imagePath);
     this.instances = new ArrayList<ResourceInstance>();
   }
   
   Resource (String name, String imagePath, String type) {
     this.name = name;
+    this.count = 0;
     this.loadedImage = loadImage(imagePath, type);
     this.instances = new ArrayList<ResourceInstance>();
   }
@@ -27,12 +31,22 @@ public class Resource {
     return this.name;
   }
   
+  public int getCount () {
+    return this.count;
+  }
+  
   public PImage getImage () {
     return this.loadedImage;
   }
   
   public ArrayList<ResourceInstance> getInstances () {
     return this.instances;
+  }
+  
+  // Modifier Functions
+  
+  public void collect (int count) {
+    this.count += count;
   }
   
   public void addInstance (ResourceInstance instance) {
