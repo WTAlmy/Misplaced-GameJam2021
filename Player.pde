@@ -1,3 +1,5 @@
+Player player = new Player(new PVector(0,0));
+
 public class Player extends Plottable{
   private float size;
   
