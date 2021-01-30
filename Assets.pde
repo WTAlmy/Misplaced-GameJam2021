@@ -1,7 +1,7 @@
 Resource bananas, potatoes;
 
 void createResources () {
-  bananas = new Resource("Banana", "https://lh3.googleusercontent.com/proxy/VHJwSGF86sZObPtw8n9egmktGkSGlNYb48ckuTPAUpF0oHolOZc6JuFzp5C8unPM3RSEP04ABT21X3lxKn41XyYp-ELVU6AF8rxxedE1SiYLMue_8_wk", "png");
+  bananas = new Resource("Banana", "https://i.pinimg.com/originals/4d/63/40/4d6340bb586909c97ad0aa717868194d.png", "png");
   potatoes = new Resource("Potatoes");
   resources.add(bananas);
   resources.add(potatoes);
@@ -17,12 +17,10 @@ class PotatoInstance extends ResourceInstance {
 }
 
 class BananaInstance extends ResourceInstance {
-    private float min_size = 15;
-    private float max_size = 45;
     private float actual_size;
     BananaInstance (PVector pos, float radius) {
       super(bananas, pos, radius);
-      this.actual_size = random(min_size, max_size);
+      this.actual_size = random(15, 45);
     }
     public float getSize () {
       return this.actual_size;

@@ -33,6 +33,25 @@ public abstract class Plottable {
     return center.copy().sub(delta);
   }
   
+  public float distTo (Plottable other) {
+    return this.pos.dist(other.getPosition());
+  }
+  
+  public boolean touching (Plottable other) {
+    float larger = max(this.getSize(), other.getSize());
+    if (this.distTo(other) <= larger) {
+      return true;
+    }
+    return false;
+  }
+  
+  public boolean visible () {
+    if (this.distTo(player) < width / 2) {
+      return true;
+    }
+    return false;
+  }
+  
   // Modifier Functions
   
   public void move (PVector delta) {

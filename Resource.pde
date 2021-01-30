@@ -55,8 +55,10 @@ public class Resource {
   
   // Processing
   public void renderInstances () {
-    for (ResourceInstance resource : this.instances) {
-      resource.render();
+    for (ResourceInstance inst : this.instances) {
+      if (inst.visible()) {
+        inst.render();
+      }
     }
   }
   
