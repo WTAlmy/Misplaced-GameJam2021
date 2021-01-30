@@ -1,10 +1,10 @@
-public class Plottable {
+public abstract class Plottable {
   
   private PVector pos;
   private float size;
   
-  public final float min_size = 1;
-  public final float max_size = 300;
+  public float min_size = 1;
+  public float max_size = 300;
   
   // Constructors
   
@@ -39,5 +39,9 @@ public class Plottable {
   public void move (PVector delta) {
     this.pos.add(delta);
   }
+  
+  // Processing
+  
+  public abstract void render ();
 
 }
