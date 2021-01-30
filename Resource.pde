@@ -1,3 +1,5 @@
+ArrayList<Resource> resources = new ArrayList<Resource>();
+
 public class Resource {
   
   private String name;
@@ -7,11 +9,18 @@ public class Resource {
   Resource (String name) {
     this.name = name;
     this.instances = new ArrayList<ResourceInstance>();
+    resources.add(this);
   }
   
   Resource (String name, String imagePath) {
     this.name = name;
     this.loadedImage = loadImage(imagePath);
+    this.instances = new ArrayList<ResourceInstance>();
+  }
+  
+  Resource (String name, String imagePath, String type) {
+    this.name = name;
+    this.loadedImage = loadImage(imagePath, type);
     this.instances = new ArrayList<ResourceInstance>();
   }
   
@@ -29,6 +38,13 @@ public class Resource {
   
   public void addInstance (ResourceInstance instance) {
     this.instances.add(instance);
+  }
+  
+  // Processing
+  public void renderInstances () {
+    for (ResourceInstance resource : this.instances) {
+      resource.render();
+    }
   }
   
 }
