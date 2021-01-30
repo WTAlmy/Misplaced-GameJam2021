@@ -30,8 +30,16 @@ public abstract class Plottable {
   
   // Access Functions
   
+  public float getSize () {
+    return this.size;
+  }
+  
   public PVector getPosition () {
-    return pos.copy();
+    return this.pos.copy();
+  }
+  
+  public PVector getRelativePos () {
+    return this.pos.copy();
   }
   
   // Modifier Functions
