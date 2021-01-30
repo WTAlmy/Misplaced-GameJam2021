@@ -1,7 +1,8 @@
 public class Island extends Plottable{
   ArrayList<Palmtree> palmtrees;
+  
   private float size;
-  int numPalmtrees;
+  private int numPalmtrees;
 
   Island(PVector pos, float radius){
     super(pos, radius);
@@ -14,11 +15,14 @@ public class Island extends Plottable{
   public float getSize(){
     return this.size;
   }
+  public int getNumPalmtrees(){
+    return this.numPalmtrees;
+  }
   
-  // fill with palmtrees
+  // fill island with palmtrees
   public void insertPalmtrees(){
     for(int i = 0; i < numPalmtrees; i++){
-      palmtrees.add(new Palmtree(this.getRelativePos(), this.getSize()/2 - 5));
+      palmtrees.add(new Palmtree(this.getRelativePos(), this.getSize()/2 - 5)); // palmtree radius=5
     }
   }
   
@@ -53,7 +57,7 @@ public void render_islands(ArrayList<Island> islands){
   for (Island island: islands){
     island.render();
   }
-  
+  // render palmtrees after all islands have been rendered
   for (Island island: islands){
     island.renderPalmtrees();
   }
