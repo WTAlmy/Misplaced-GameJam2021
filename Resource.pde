@@ -9,7 +9,6 @@ public class Resource {
   Resource (String name) {
     this.name = name;
     this.instances = new ArrayList<ResourceInstance>();
-    resources.add(this);
   }
   
   Resource (String name, String imagePath) {
@@ -81,4 +80,10 @@ public abstract class ResourceInstance extends Plottable {
     }
   }
   
+}
+
+public void renderResources() {
+  for (Resource resource : resources) {
+    resource.renderInstances();
+  }
 }
