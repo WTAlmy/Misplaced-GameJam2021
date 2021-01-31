@@ -43,7 +43,7 @@ public class Player extends Plottable {
   }
   
   public void displayInventory(float x, float y){
-    textSize(32);
+    textSize(16);
     fill(0);
     text("Wood: " + wood.count, x, y);
   }
