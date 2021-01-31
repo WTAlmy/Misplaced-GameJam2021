@@ -4,7 +4,7 @@ public class Palmtree extends Plottable {
   
   Palmtree(PVector pos, float radius) {
     super(pos, radius);
-    this.size = 10;
+    this.size = 40;
   }
 
   // access 

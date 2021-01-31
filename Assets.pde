@@ -57,6 +57,7 @@ class BottleInstance extends ResourceInstance {
   }
 
   public void render() {
+    println("got here");
     float floatVal = sin(millis()/600.0);
     PImage img = bottles.getImage();
     PVector pos = this.getRelativePos();
@@ -71,7 +72,7 @@ class BottleInstance extends ResourceInstance {
   }
 }
 
-public void generate_bottles(int amount, float radius) {
+public void generateBottles(int amount, float radius) {
   for (int i = 0; i < amount; i++){
     BottleInstance newBottle = new BottleInstance(new PVector(0, 0), radius);
     bottleArray.add(newBottle);

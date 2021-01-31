@@ -16,54 +16,17 @@ public class Player extends Plottable {
   }
 
   public void update() {
-    float terrainMulti = 0.05;
-
-    float movementX = mouseX - center.x;
-    float movementY = mouseY - center.y;
-
-    if (abs(movementX) > 5) {
-      if (abs(movementX) > 150) {
-        if (movementX > 0) {
-          movementX = 150;
-        } else {
-          movementX = -150;
-        }
-      }
-
-      float deltaVectorX = movementX * terrainMulti;
-      this.move(new PVector(deltaVectorX, 0));
+    float terrainMulti = 0.02;
+    if (onWater()) {
+      terrainMulti = 0.01;
     }
 
-    if (abs(movementY) > 5) {
-      if (abs(movementY) > 150) {
-        if (movementY > 0) {
-          movementY = 150;
-        } else {
-          movementY = -150;
-        }
-      }
-
-      float deltaVectorY = movementY * terrainMulti;
-      this.move(new PVector(0, deltaVectorY));
-    }
+    PVector movement = new PVector(mouseX - center.x, mouseY - center.y);
+    float magnitude = constrain(map(movement.mag(), 20, 150, 0, 100), 0, 100);
+    PVector direction = movement.normalize().mult(magnitude * terrainMulti);
+    this.move(direction);
+    
   }
-
-  public void attacked() {
-    if (millis() > 5*1000) {
-      for (Island island : islands) {
-        if (!player.touching(island)) {
-          for (Hostile hostile : hostiles) {
-            if (player.touching(hostile)){
-              if (hostile.type == 0){
-                println("Player attacked by ", 
-              }              
-            }
-          }
-        }
-      }
-    }
-  }
-
 
   public void status() {
     if (this.life <= 0) {

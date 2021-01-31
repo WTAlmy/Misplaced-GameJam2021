@@ -38,7 +38,7 @@ public abstract class Plottable {
   }
 
   public boolean touching (Plottable other) {
-    float larger = max(this.getSize(), other.getSize());
+    float larger = 0.5 * max(this.getSize(), other.getSize());
     if (this.distTo(other) <= larger) {
       return true;
     }
