@@ -47,6 +47,9 @@ public class Hostile extends Plottable {
     float delta = (millis() - angle_start) / 1000.0;
     if (delta > 5) newAngle();
     this.move(this.lerpAngle(delta));
+    if (this.getPosition().dist(new PVector(0,0)) > 1000) {
+      super.pos = new PVector(0, 0);
+    }
   } 
 
   public void render () {

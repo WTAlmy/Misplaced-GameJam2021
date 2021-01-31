@@ -46,7 +46,7 @@ public abstract class Plottable {
   }
 
   public boolean visible () {
-    if (this.distTo(player) < width / 2) {
+    if (this.distTo(player) < (width / 2) + this.getSize()) {
       return true;
     }
     return false;
@@ -62,3 +62,56 @@ public abstract class Plottable {
 
   public abstract void render ();
 }
+
+public ArrayList<Background> tiles;
+
+public class Background extends Plottable {
+  
+  Background (PVector pos) {
+    super(pos);
+    tiles.add(this);
+  }
+  
+  public float getSize () {
+    return 1000;
+  }
+  
+  public void update () {
+    if (frameCount % 4 == 0) {
+      this.move(new PVector(1, 1));
+    }
+    if (super.pos.x >= 3064) {
+      super.pos.x = -3064;
+    }
+    if (super.pos.y >= 3064) {
+      super.pos.y = -3064;
+    }
+  }
+  
+  public void render () {
+    if (this.visible()) {
+      tint(255, 80);
+      PVector local = this.getRelativePos();
+      image(background_image, local.x, local.y);
+      tint(255, 255);
+    }
+  }
+}
+
+public void create_background () {
+  tiles = new ArrayList<Background>();
+  for (int i = -2560; i <= 2560; i += 1024) {
+    for (int j = -2560; j <= 2560; j += 1024) {
+      new Background(new PVector(i, j)).update();
+    }
+  } 
+}
+
+public void handle_background () {
+  for (Background b : tiles) {
+    b.update();
+    b.render();
+  }
+}
+  
+  

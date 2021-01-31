@@ -1,8 +1,7 @@
-Player player = new Player(new PVector(600, 400));
+Player player = new Player(new PVector(0, 0));
 
 public class Player extends Plottable {
   private float size;
-  PVector deltaVector = new PVector(600, 400);
 
   Player(PVector pos) {
     super(pos);
@@ -25,8 +24,8 @@ public class Player extends Plottable {
           movementX = -150;
         }
       }
-      deltaVector.x = movementX * 0.01;
-      this.move(deltaVector);
+      float deltaVectorX = movementX * 0.051;
+      this.move(new PVector(deltaVectorX, 0));
     }
 
     if (abs(movementY) > 5) {
@@ -37,8 +36,8 @@ public class Player extends Plottable {
           movementY = -150;
         }
       }
-      deltaVector.y = movementY * 0.01;
-      this.move(deltaVector);
+      float deltaVectorY = movementY* 0.051;
+      this.move(new PVector(0, deltaVectorY));
     }
   }
 

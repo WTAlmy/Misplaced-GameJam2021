@@ -66,25 +66,25 @@ public class Resource {
 
 public abstract class ResourceInstance extends Plottable {
   
-  private Resource resource;
+  private Resource parent;
   
   public ResourceInstance (Resource type, PVector pos) {
     super(pos);
-    this.resource = type;
-    this.resource.addInstance(this);
+    this.parent = type;
+    this.parent.addInstance(this);
   }
   
   public ResourceInstance (Resource type, PVector pos, float radius) {
     super(pos, radius);
-    this.resource = type;
-    this.resource.addInstance(this);
+    this.parent = type;
+    this.parent.addInstance(this);
   }
   
   //
   // Default rendering in case Resource Instance does not override
   //
   public void render () {
-    PImage img = this.resource.getImage();
+    PImage img = this.parent.getImage();
     PVector pos = this.getRelativePos();
     float size = this.getSize();
     if (img != null) {
