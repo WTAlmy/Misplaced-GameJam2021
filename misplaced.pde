@@ -1,24 +1,32 @@
+import processing.sound.*;
+
 PVector center;
 ArrayList<Island> islands;
 
+SoundFile file;
 PImage background_image;
 
 void settings () {
+  
   size(1200, 800, P2D);
   pixelDensity(2);
+  file = new SoundFile(this, "waves.mp3");
+  background_image = loadImage("seamless.jpg");
+  center = new PVector(width/2, height/2);
+  
+  create_background();
+  createResources();
+  generateHostiles(50, 1500.0);
+  islands = generate_islands(30, 1000);
+  generateHostiles(50, 1500.0); 
+  generate_bottles(30, 1500.0);
 }
 
 void setup () {
   frameRate(120);
   imageMode(CENTER);
-  center = new PVector(width/2, height/2);  
-  
-  background_image = loadImage("seamless.jpg");
-  create_background();
-  islands = generate_islands(30, 1000);
-  createResources();
-  generateHostiles(50, 1500.0);
-  generate_bottles(30, 1500.0);
+  file.amp(0.3);
+  file.play();
 }
 
 void draw () {
@@ -30,6 +38,8 @@ void draw () {
   render_islandBackground(islands);
   render_islands(islands);
   player.update();
+  player.attacked();
+  //player.status();
   player.render();
   renderResources();
   noFill();

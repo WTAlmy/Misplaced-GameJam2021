@@ -3,10 +3,12 @@ Player player = new Player(new PVector(0, 0));
 public class Player extends Plottable {
 
   private float size;
+  public int life;
 
   Player(PVector pos) {
     super(pos);
     this.size = 15;
+    this.life = 3;
   }
 
   public float getSize() {
@@ -27,7 +29,7 @@ public class Player extends Plottable {
           movementX = -150;
         }
       }
-      
+
       float deltaVectorX = movementX * terrainMulti;
       this.move(new PVector(deltaVectorX, 0));
     }
@@ -45,12 +47,32 @@ public class Player extends Plottable {
       this.move(new PVector(0, deltaVectorY));
     }
   }
-  
-  public void attacked(){
-    
+
+  public void attacked() {
+    if (millis() > 5*1000) {
+      for (Island island : islands) {
+        if (!player.touching(island)) {
+          for (Hostile hostile : hostiles) {
+            if (player.touching(hostile)){
+              if (hostile.type == 0){
+                println("Player attacked by ", 
+              }              
+            }
+          }
+        }
+      }
+    }
   }
-  
-  public void displayInventory(float x, float y){
+
+
+  public void status() {
+    if (this.life <= 0) {
+      println("PLAYER DIED");
+      exit();
+    }
+  }
+
+  public void displayInventory(float x, float y) {
     textSize(16);
     fill(0);
     text("Wood: " + wood.count, x, y);

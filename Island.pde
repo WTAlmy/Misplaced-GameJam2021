@@ -75,7 +75,7 @@ public class Island extends Plottable {
 public ArrayList<Island> generate_islands(int numIslands, float radius) {
   ArrayList<Island> islands = new ArrayList<Island>();
   for (int i =0; i < numIslands; i++) {
-    Island newIsland = new Island(new PVector(0, 0), radius);
+    Island newIsland = new Island(new PVector(0, 0), min(radius, 200*i));
     newIsland.insertPalmtrees();
     islands.add(newIsland);
   }

@@ -93,8 +93,8 @@ public class Hostile extends Plottable {
 
 public void renderHostiles () {
   for (Hostile hostile : hostiles) {
+    hostile.update();
     if (hostile.visible()) {
-      hostile.update();
       hostile.render();
     }
   }
