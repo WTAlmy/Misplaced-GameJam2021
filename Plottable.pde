@@ -15,7 +15,7 @@ public abstract class Plottable {
   // Create a Plottable within a radius of a given location
   //
   Plottable (PVector pos, float radius) {
-    float distance = random(radius / 20, radius);
+    float distance = random(-radius, radius);
     PVector offset = PVector.random2D().mult(distance);
     this.pos = PVector.add(pos, offset);
   }
