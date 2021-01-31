@@ -5,17 +5,19 @@ PImage background_image;
 
 void settings () {
   size(1200, 800, P2D);
+  pixelDensity(2);
 }
 
 void setup () {
   frameRate(60);
   imageMode(CENTER);
   center = new PVector(width/2, height/2);  
+  
   background_image = loadImage("seamless.jpg");
   create_background();
   
   createResources();
-  generateHostiles(50, 1000.0);  
+  generateHostiles(50, 1500.0);  
 }
 
 void draw () {
@@ -28,6 +30,9 @@ void draw () {
   renderResources();
   noFill();
   stroke(255);
-  text(frameRate, width/2, height/3);
+  textSize(12);
+  text(frameRate, width-50, height/3);
+  text(player.getPosition().x, width-50, height/3+30);
+  text(player.getPosition().y, width-50, height/3+60);
   player.displayInventory(1000.0, 600.0);
 }
