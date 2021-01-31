@@ -9,7 +9,7 @@ void settings () {
 }
 
 void setup () {
-  frameRate(60);
+  frameRate(120);
   imageMode(CENTER);
   center = new PVector(width/2, height/2);  
   
@@ -17,7 +17,8 @@ void setup () {
   create_background();
   islands = generate_islands(30, 1000);
   createResources();
-  generateHostiles(50, 1500.0);  
+  generateHostiles(50, 1500.0);
+  generate_bottles(30, 1500.0);
 }
 
 void draw () {
@@ -25,6 +26,7 @@ void draw () {
   renderHostiles();
   handle_background();
   render_islandWater(islands);
+  render_bottles(bottleArray);
   render_islandBackground(islands);
   render_islands(islands);
   player.update();

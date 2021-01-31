@@ -75,13 +75,14 @@ public class Island extends Plottable {
 public ArrayList<Island> generate_islands(int numIslands, float radius) {
   ArrayList<Island> islands = new ArrayList<Island>();
   for (int i =0; i < numIslands; i++) {
-    Island newIsland = new Island(new PVector(width/2, height/2), radius);
+    Island newIsland = new Island(new PVector(0, 0), radius);
     newIsland.insertPalmtrees();
     islands.add(newIsland);
   }
   return islands;
 }
 
+// render island water
 public void render_islandWater(ArrayList<Island> islands) {
   for (Island island : islands) {
     island.renderIslandWater();
