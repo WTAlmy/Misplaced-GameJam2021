@@ -54,10 +54,10 @@ public class Hostile extends Plottable {
   public void update () {
     float delta = (float(millis()) - angle_start) / 1000.0;
     if (delta > 5) newAngle();
-    PVector movement = this.lerpAngle(delta);
+    PVector movement = this.lerpAngle(delta).mult(2).mult(hostile_lum);
     this.move(movement);
     this.x_movement = movement.x;
-    if (this.getPosition().dist(new PVector(0,0)) > 1500) {
+    if (this.getPosition().dist(new PVector(0,0)) > 2000) {
       super.pos = new PVector(0, 0);
     }
   } 

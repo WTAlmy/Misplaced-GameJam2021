@@ -6,6 +6,10 @@ ArrayList<Island> islands;
 SoundFile file;
 PImage background_image;
 
+float luminosity;
+float island_lum;
+float hostile_lum;
+
 void settings () {
   
   size(1200, 800, P2D);
@@ -18,8 +22,8 @@ void settings () {
   
   create_background();
   createResources();
-  islands = generate_islands(30, 1000);
-  generateHostiles(50, 1500.0);  
+  islands = generate_islands(30, 1200);
+  generateHostiles(90, 1500.0);  
   
 }
 
@@ -31,7 +35,10 @@ void setup () {
 }
 
 void draw () {
-  background(0, 0, 255);
+  luminosity = sin(frameCount / 999.0);
+  island_lum = map(luminosity, -1, 1, 0.2, 1);
+  hostile_lum = map(luminosity, -1, 1, 1, 0.3);
+  background(0, 0, 255.0 * luminosity);
   renderHostiles();
   handle_background();
   render_islandWater(islands);

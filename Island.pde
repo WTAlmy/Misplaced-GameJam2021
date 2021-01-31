@@ -41,7 +41,7 @@ public class Island extends Plottable {
   public void render() {
     noStroke();
     PVector pos = this.getRelativePos();
-    fill(245, 235, 214);
+    fill(245 * island_lum, 235 * island_lum, 214 * island_lum);
     circle(pos.x, pos.y, this.getSize());
   }
 
@@ -49,7 +49,7 @@ public class Island extends Plottable {
   public void renderIslandWater() {
     noStroke();
     PVector pos = this.getRelativePos();
-    fill(93, 206, 231);
+    fill(93 * island_lum, 206 * island_lum, 231 * island_lum);
     float waterBorder = this.getSize() + this.borderSize;
     float wave = sin(float(millis()) / 1500.0);
     circle(pos.x, pos.y, waterBorder + abs(wave)*20);
@@ -59,7 +59,7 @@ public class Island extends Plottable {
   public void renderBeach() {
     noStroke();
     PVector pos = this.getRelativePos();
-    fill(253, 251, 249);
+    fill(253 * island_lum, 251 * island_lum, 249 * island_lum);
     circle(pos.x, pos.y, this.getSize() + this.borderSize);
   }
 
@@ -75,7 +75,7 @@ public class Island extends Plottable {
 public ArrayList<Island> generate_islands(int numIslands, float radius) {
   ArrayList<Island> islands = new ArrayList<Island>();
   for (int i =0; i < numIslands; i++) {
-    Island newIsland = new Island(new PVector(0, 0), radius);
+    Island newIsland = new Island(new PVector(0, 0), min(radius, 200 * i));
     newIsland.insertPalmtrees();
     islands.add(newIsland);
   }
