@@ -1,9 +1,9 @@
-Resource bananas, potatoes, wood;
+Resource bananas, potatoes, wood, bottles;
 
 void createResources () {
   bananas = new Resource("Banana", "https://i.pinimg.com/originals/4d/63/40/4d6340bb586909c97ad0aa717868194d.png", "png");
   potatoes = new Resource("Potatoes");
-  wood = new Resource("Wood");
+  wood = new Resource("Wood", "logsNoBackground copy.png", "png");
   resources.add(bananas);
   resources.add(potatoes);
   resources.add(wood);
@@ -34,6 +34,6 @@ class WoodInstance extends ResourceInstance {
     super(wood, pos, radius);
   }
   public float getSize () {
-    return 15;
+    return 35;
   }
 }

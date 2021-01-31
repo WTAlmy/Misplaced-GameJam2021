@@ -1,7 +1,7 @@
 Player player = new Player(new PVector(0, 0));
 
 public class Player extends Plottable {
-  
+
   private float size;
 
   Player(PVector pos) {
@@ -14,6 +14,8 @@ public class Player extends Plottable {
   }
 
   public void update() {
+    float terrainMulti = 0.05;
+
     float movementX = mouseX - center.x;
     float movementY = mouseY - center.y;
 
@@ -25,7 +27,8 @@ public class Player extends Plottable {
           movementX = -150;
         }
       }
-      float deltaVectorX = movementX * 0.02;
+      
+      float deltaVectorX = movementX * terrainMulti;
       this.move(new PVector(deltaVectorX, 0));
     }
 
@@ -37,7 +40,8 @@ public class Player extends Plottable {
           movementY = -150;
         }
       }
-      float deltaVectorY = movementY* 0.02;
+
+      float deltaVectorY = movementY * terrainMulti;
       this.move(new PVector(0, deltaVectorY));
     }
   }
@@ -47,7 +51,7 @@ public class Player extends Plottable {
     fill(0);
     text("Wood: " + wood.count, x, y);
   }
-  
+
   public void render() {
     stroke(0);
     fill(255, 0, 0);

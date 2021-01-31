@@ -1,5 +1,5 @@
 PVector center;
-ArrayList<Island> islands = generate_islands(30, 1000);
+ArrayList<Island> islands;
 
 PImage background_image;
 
@@ -15,7 +15,7 @@ void setup () {
   
   background_image = loadImage("seamless.jpg");
   create_background();
-  
+  islands = generate_islands(30, 1000);
   createResources();
   generateHostiles(50, 1500.0);  
 }
@@ -24,6 +24,8 @@ void draw () {
   background(0, 0, 255);
   renderHostiles();
   handle_background();
+  render_islandWater(islands);
+  render_islandBackground(islands);
   render_islands(islands);
   player.update();
   player.render();

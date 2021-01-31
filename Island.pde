@@ -4,12 +4,14 @@ public class Island extends Plottable {
 
   private float size;
   private int numPalmtrees;
+  public float borderSize;
 
   Island(PVector pos, float radius) {
     super(pos, radius);
     this.size = random(80, 150);
     palmtrees = new ArrayList<Palmtree>();
-    numPalmtrees = int(random(5, 10));
+    this.numPalmtrees = int(random(3, 7));
+    this.borderSize = random(this.getSize()/6, this.getSize()/4);
   }
 
   // access 
@@ -19,27 +21,49 @@ public class Island extends Plottable {
   public int getNumPalmtrees() {
     return this.numPalmtrees;
   }
-  
-  public void addLog(){
+
+  public void addLog() {
     WoodInstance woodLog = new WoodInstance(this.getPosition(), 5.0);
     woodLogs.add(woodLog);
   }
-  
+
   // fill island with palmtrees
   public void insertPalmtrees() {
     for (int i = 0; i < numPalmtrees; i++) {
-      palmtrees.add(new Palmtree(this.getPosition(), this.getSize()/2 - 5)); // palmtree radius=5
+      Palmtree newPalmtree = new Palmtree(this.getPosition(), this.getSize()/2 - 5); // palmtree radius=5
+      newPalmtree.palmtreeImage = loadImage("palmtreeNoBackground-min.png");
+      newPalmtree.palmtreeImage.resize(40, 0);
+      palmtrees.add(newPalmtree);
     }
   }
 
-  // Render 
+  // Render island
   public void render() {
     noStroke();
-    fill(255, 255, 0);
     PVector pos = this.getRelativePos();
+    fill(245, 235, 214);
     circle(pos.x, pos.y, this.getSize());
   }
 
+  // render teal water color under island and beach
+  public void renderIslandWater() {
+    noStroke();
+    PVector pos = this.getRelativePos();
+    fill(93, 206, 231);
+    float waterBorder = this.getSize() + this.borderSize;
+    float wave = sin(float(millis()) / 1500.0);
+    circle(pos.x, pos.y, waterBorder + abs(wave)*20);
+  }
+
+  // render light color border behind island
+  public void renderBeach() {
+    noStroke();
+    PVector pos = this.getRelativePos();
+    fill(253, 251, 249);
+    circle(pos.x, pos.y, this.getSize() + this.borderSize);
+  }
+
+  // render all palmtrees belonging to island
   public void renderPalmtrees() {
     for (Palmtree palmtree : this.palmtrees) {
       palmtree.render();
@@ -58,11 +82,25 @@ public ArrayList<Island> generate_islands(int numIslands, float radius) {
   return islands;
 }
 
+public void render_islandWater(ArrayList<Island> islands) {
+  for (Island island : islands) {
+    island.renderIslandWater();
+  }
+}
+
+// renders island background
+public void render_islandBackground(ArrayList<Island> islands) {
+  for (Island island : islands) {
+    island.renderBeach();
+  }
+}
+
 // renders all islands + palmtrees
 public void render_islands(ArrayList<Island> islands) {
   for (Island island : islands) {
     island.render();
   }
+
   // render palmtrees after all islands have been rendered
   for (Island island : islands) {
     island.renderPalmtrees();
