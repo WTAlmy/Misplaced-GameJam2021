@@ -26,7 +26,7 @@ void settings () {
 }
 
 void setup () {
-  frameRate(120);
+  frameRate(60);
   imageMode(CENTER);
   file.amp(0.3);
   file.play();
