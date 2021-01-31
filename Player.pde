@@ -25,7 +25,7 @@ public class Player extends Plottable {
           movementX = -150;
         }
       }
-      float deltaVectorX = movementX * 0.051;
+      float deltaVectorX = movementX * 0.02;
       this.move(new PVector(deltaVectorX, 0));
     }
 
@@ -37,7 +37,7 @@ public class Player extends Plottable {
           movementY = -150;
         }
       }
-      float deltaVectorY = movementY* 0.051;
+      float deltaVectorY = movementY* 0.02;
       this.move(new PVector(0, deltaVectorY));
     }
   }
