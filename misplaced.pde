@@ -11,12 +11,17 @@ void setup () {
   frameRate(60);
   imageMode(CENTER);
   center = new PVector(width/2, height/2);
+<<<<<<< Updated upstream
   
   background_image = loadImage("seamless.jpg");
   create_background();
   
   createResources();
   generateHostiles(50, 1000.0);  
+=======
+  generateHostiles(50, 1000.0);
+  createResources();
+>>>>>>> Stashed changes
 }
 
 void draw () {
@@ -26,8 +31,14 @@ void draw () {
   render_islands(islands);
   player.update();
   player.render();
+<<<<<<< Updated upstream
   renderResources();
   noFill();
   stroke(255);
   text(frameRate, width/2, height/3);
+=======
+  renderHostiles();
+  renderResources();
+  player.displayInventory(1000.0, 600.0);
+>>>>>>> Stashed changes
 }

@@ -1,5 +1,6 @@
 public class Island extends Plottable {
   ArrayList<Palmtree> palmtrees;
+  ArrayList<WoodInstance> woodLogs;
 
   private float size;
   private int numPalmtrees;
@@ -18,7 +19,12 @@ public class Island extends Plottable {
   public int getNumPalmtrees() {
     return this.numPalmtrees;
   }
-
+  
+  public void addLog(){
+    WoodInstance woodLog = new WoodInstance(this.getPosition(), 5.0);
+    woodLogs.add(woodLog);
+  }
+  
   // fill island with palmtrees
   public void insertPalmtrees() {
     for (int i = 0; i < numPalmtrees; i++) {

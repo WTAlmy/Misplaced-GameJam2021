@@ -1,6 +1,7 @@
 Player player = new Player(new PVector(0, 0));
 
 public class Player extends Plottable {
+  
   private float size;
 
   Player(PVector pos) {
@@ -40,7 +41,13 @@ public class Player extends Plottable {
       this.move(new PVector(0, deltaVectorY));
     }
   }
-
+  
+  public void displayInventory(float x, float y){
+    textSize(32);
+    fill(0);
+    text("Wood: " + wood.count, x, y);
+  }
+  
   public void render() {
     stroke(0);
     fill(255, 0, 0);

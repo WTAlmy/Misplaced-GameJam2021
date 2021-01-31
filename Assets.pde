@@ -1,10 +1,12 @@
-Resource bananas, potatoes;
+Resource bananas, potatoes, wood;
 
 void createResources () {
   bananas = new Resource("Banana", "https://i.pinimg.com/originals/4d/63/40/4d6340bb586909c97ad0aa717868194d.png", "png");
   potatoes = new Resource("Potatoes");
+  wood = new Resource("Wood");
   resources.add(bananas);
   resources.add(potatoes);
+  resources.add(wood);
 }
 
 class PotatoInstance extends ResourceInstance {
@@ -24,5 +26,14 @@ class BananaInstance extends ResourceInstance {
   }
   public float getSize () {
     return this.actual_size;
+  }
+}
+
+class WoodInstance extends ResourceInstance {
+   WoodInstance (PVector pos, float radius) {
+    super(wood, pos, radius);
+  }
+  public float getSize () {
+    return 15;
   }
 }
