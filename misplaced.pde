@@ -29,7 +29,7 @@ void setup () {
   frameRate(60);
   imageMode(CENTER);
   file.amp(0.3);
-  file.play();
+  file.loop();
 }
 
 void draw () {
