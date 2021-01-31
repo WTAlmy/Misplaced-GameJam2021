@@ -16,9 +16,6 @@ void setup () {
   
   createResources();
   generateHostiles(50, 1000.0);  
-
-  generateHostiles(50, 1000.0);
-  createResources();
 }
 
 void draw () {
@@ -32,7 +29,5 @@ void draw () {
   noFill();
   stroke(255);
   text(frameRate, width/2, height/3);
-  renderHostiles();
-  renderResources();
   player.displayInventory(1000.0, 600.0);
 }
