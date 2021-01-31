@@ -1,3 +1,4 @@
+SoundFile pickup;
 Resource bananas, potatoes, wood, bottles;
 
 void createResources () {
@@ -7,6 +8,7 @@ void createResources () {
   resources.add(bananas);
   resources.add(potatoes);
   resources.add(wood);
+  pickup = new SoundFile(this, "collect.mp3");
 }
 
 class PotatoInstance extends ResourceInstance {

@@ -47,6 +47,8 @@ public class Resource {
   
   public void collect (int count) {
     this.count += count;
+    pickup.play();
+    println("collect called");
   }
   
   public void addInstance (ResourceInstance instance) {

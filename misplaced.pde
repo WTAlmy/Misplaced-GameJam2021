@@ -4,7 +4,6 @@ PVector center;
 ArrayList<Island> islands;
 
 SoundFile file;
-String audioName = "data/waves.mp3";
 PImage background_image;
 
 void settings () {
@@ -27,6 +26,7 @@ void settings () {
 void setup () {
   frameRate(60);
   imageMode(CENTER);  
+  file.amp(0.3);
   file.play();
 }
 

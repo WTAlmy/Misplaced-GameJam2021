@@ -46,7 +46,7 @@ public abstract class Plottable {
   }
 
   public boolean visible () {
-    if (this.distTo(player) < (width / 2) + this.getSize()) {
+    if (this.distTo(player) < (width / 2) + (height / 4) + this.getSize()) {
       return true;
     }
     return false;
