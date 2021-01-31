@@ -1,6 +1,12 @@
 public static final int SHARK = 0;
 public static final int JELLY = 1;
 
+PImage shark_sheet;
+PImage shark_frame[] = new PImage[7];
+
+PImage jelly_sheet;
+PImage jelly_frame[] = new PImage[9];
+
 public ArrayList<Hostile> hostiles;
 
 public class Hostile extends Plottable {
@@ -10,6 +16,8 @@ public class Hostile extends Plottable {
   private float angle;
   private float angle_start;
   private float target_angle;
+  
+  private float x_movement = 1;
 
   Hostile (int type, PVector pos) {
     super(pos);
@@ -28,12 +36,12 @@ public class Hostile extends Plottable {
   }
 
   public float getSize () {
-    return 20;
+    return 32;
   }
   
   private void newAngle () {
     this.angle = target_angle;
-    this.angle_start = millis();
+    this.angle_start = float(millis());
     this.target_angle = random(0, TWO_PI);
   }
   
@@ -44,10 +52,12 @@ public class Hostile extends Plottable {
   }
   
   public void update () {
-    float delta = (millis() - angle_start) / 1000.0;
+    float delta = (float(millis()) - angle_start) / 1000.0;
     if (delta > 5) newAngle();
-    this.move(this.lerpAngle(delta));
-    if (this.getPosition().dist(new PVector(0,0)) > 1000) {
+    PVector movement = this.lerpAngle(delta);
+    this.move(movement);
+    this.x_movement = movement.x;
+    if (this.getPosition().dist(new PVector(0,0)) > 1500) {
       super.pos = new PVector(0, 0);
     }
   } 
@@ -55,17 +65,29 @@ public class Hostile extends Plottable {
   public void render () {
     PVector loc = this.getRelativePos();
     switch (this.type) {
-    case SHARK:
-      fill(80, 80, 80);
-      stroke(255);
-      ellipse(loc.x, loc.y, this.getSize(), this.getSize() * 3);
+    case SHARK: {
+      int frame = int(frameCount * 0.2) % 7;
+      if (this.x_movement > 0) {
+        image(shark_frame[frame], loc.x, loc.y, this.getSize(), this.getSize());
+      } else {
+        pushMatrix();
+        scale(-1, 1);
+        image(shark_frame[frame], -loc.x, loc.y, this.getSize(), this.getSize());
+        popMatrix();
+      }
       break;
-    case JELLY:
-      fill(255, 200, 200);
-      stroke(127);
-      circle(loc.x, loc.y, this.getSize());
+    } case JELLY: {
+      int frame = int(frameCount * 0.2) % 9;
+      if (this.x_movement > 0) {
+        image(jelly_frame[frame], loc.x, loc.y, this.getSize(), this.getSize());
+      } else {
+        pushMatrix();
+        scale(-1, 1);
+        image(jelly_frame[frame], -loc.x, loc.y, this.getSize(), this.getSize());
+        popMatrix();
+      }
       break;
-    }
+    }}
   }
 }
 
@@ -80,6 +102,14 @@ public void renderHostiles () {
 
 public void generateHostiles (int count, float radius) {
   hostiles = new ArrayList<Hostile>();
+  shark_sheet = loadImage("shark_sprite.png", "png");
+  jelly_sheet = loadImage("jelly_sprite.png", "png");
+  for (int i = 0; i < 7; i++) {
+    shark_frame[i] = shark_sheet.get((i%5) * 128, int(i/5)*128, 128, 128);
+  }
+  for (int i = 0; i < 9; i++) {
+    jelly_frame[i] = jelly_sheet.get(1 + (i%5) * 129, int(i/5)*129, 128, 128);
+  }
   for (int i = 0; i < count; i++) {
     if (random(1.0) > 0.5) {
       hostiles.add(new Hostile(SHARK, center, radius));
