@@ -106,3 +106,12 @@ public void render_islands(ArrayList<Island> islands) {
     island.renderPalmtrees();
   }
 }
+
+public boolean onWater () {
+  for (Island island : islands) {
+    if (player.touching(island)) {
+      return false;
+    }
+  }
+  return true;
+}
