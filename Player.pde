@@ -46,10 +46,15 @@ public class Player extends Plottable {
     }
   }
   
+  public void attacked(){
+    
+  }
+  
   public void displayInventory(float x, float y){
     textSize(16);
     fill(0);
     text("Wood: " + wood.count, x, y);
+    text("Bottles: " + bottles.count, x, y - 20);
   }
 
   public void render() {

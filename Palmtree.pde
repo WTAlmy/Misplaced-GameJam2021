@@ -11,7 +11,7 @@ public class Palmtree extends Plottable {
   public float getSize() {
     return this.size;
   }
-
+  
   // render palmtree
   public void render() {
     PImage img = this.palmtreeImage;
