@@ -1,19 +1,19 @@
 Player player = new Player(new PVector(600, 400));
 
-public class Player extends Plottable{
+public class Player extends Plottable {
   private float size;
   PVector deltaVector = new PVector(600, 400);
-  
-  Player(PVector pos){
+
+  Player(PVector pos) {
     super(pos);
     this.size = 15;
   }
-  
-  public float getSize(){
+
+  public float getSize() {
     return this.size;
   }
-  
-  public void update(){
+
+  public void update() {
     float movementX = mouseX - center.x;
     float movementY = mouseY - center.y;
 
@@ -41,8 +41,8 @@ public class Player extends Plottable{
       this.move(deltaVector);
     }
   }
-  
-  public void render(){
+
+  public void render() {
     stroke(0);
     fill(255, 0, 0);
     circle(center.x, center.y, this.size);

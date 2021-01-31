@@ -3,12 +3,13 @@ ArrayList<Island> islands = generate_islands(30, 1000);
 
 void settings () {
   size(1200, 800, P2D);
-  frameRate(60);
-  imageMode(CENTER);
 }
 
 void setup () {
+  frameRate(60);    
+  imageMode(CENTER);
   center = new PVector(width/2, height/2);
+  generateHostiles(50, 1000.0);
 }
 
 void draw () {
@@ -16,4 +17,5 @@ void draw () {
   render_islands(islands);
   player.update();
   player.render();
+  renderHostiles();
 }
