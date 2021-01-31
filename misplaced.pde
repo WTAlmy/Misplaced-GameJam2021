@@ -1,23 +1,33 @@
+import processing.sound.*;
+
 PVector center;
 ArrayList<Island> islands;
 
+SoundFile file;
+String audioName = "data/waves.mp3";
 PImage background_image;
 
 void settings () {
+  
   size(1200, 800, P2D);
   pixelDensity(2);
+  
+  file = new SoundFile(this, "waves.mp3");
+  background_image = loadImage("seamless.jpg");
+  
+  center = new PVector(width/2, height/2);
+  
+  create_background();
+  createResources();
+  islands = generate_islands(30, 1000);
+  generateHostiles(50, 1500.0);  
+  
 }
 
 void setup () {
   frameRate(60);
-  imageMode(CENTER);
-  center = new PVector(width/2, height/2);  
-  
-  background_image = loadImage("seamless.jpg");
-  create_background();
-  islands = generate_islands(30, 1000);
-  createResources();
-  generateHostiles(50, 1500.0);  
+  imageMode(CENTER);  
+  file.play();
 }
 
 void draw () {
