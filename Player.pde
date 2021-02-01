@@ -1,5 +1,6 @@
 Player player = new Player(new PVector(0, 0));
 SoundFile playerDeathSound;
+SoundFile destroyPalmtree;
 
 public class Player extends Plottable {
 
@@ -49,9 +50,6 @@ public class Player extends Plottable {
   
   public void playerWin(){
     if (wood.count == 30 && bottles.count == 15){
-      PROGRAM_STATE = 3;
-    }
-    if (wood.count == 1){
       PROGRAM_STATE = 3;
     }
   }

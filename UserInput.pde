@@ -5,9 +5,9 @@ void keyPressed() {
     settings();
   }
   
-  //if (key == 'd') {
-  //  PROGRAM_STATE = 2;
-  //}
+  if (key == 'p') {
+    PROGRAM_STATE = 2;
+  }
   
   // Interact with item
   if (key == 'f') {
@@ -19,6 +19,7 @@ void keyPressed() {
           if (player.touching(island.palmtrees.get(i))) {
             WoodInstance woodPiece = new WoodInstance(island.palmtrees.get(i).getPosition(), 5);
             island.palmtrees.remove(i);
+            destroyPalmtree.play();
             println("player destroyed a palmtree");
             break;
           }

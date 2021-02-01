@@ -20,6 +20,7 @@ void settings () {
   jellySound = new SoundFile(this, "electricshock.mp3");
   sharkSound = new SoundFile(this, "sharkSound.mp3");
   playerDeathSound = new SoundFile(this, "deathSound.mp3");
+  destroyPalmtree = new SoundFile(this, "destroyPalmtree.mp3");
   background_image = loadImage("seamless.jpg");
   center = new PVector(width/2, height/2);
   
@@ -39,31 +40,6 @@ void setup () {
   file.amp(0.3);
   file.loop();
 }
-
-//void draw () {
-//  luminosity = sin(frameCount / 999.0);
-//  island_lum = map(luminosity, -1, 1, 0.2, 1);
-//  hostile_lum = map(luminosity, -1, 1, 1, 0.3);
-//  background(0, 0, 255.0 * luminosity);
-//  renderHostiles();
-//  handle_background();
-//  render_islandWater(islands);
-//  render_bottles(bottleArray);
-//  render_islandBackground(islands);
-//  render_islands(islands);
-//  player.update();
-//  player.render();
-//  player.attacked();
-//  renderResources();
-//  noFill();
-//  stroke(255);
-//  textSize(12);
-//  text(frameRate, width-50, height/3);
-//  text(player.getPosition().x, width-50, height/3+30);
-//  text(player.getPosition().y, width-50, height/3+60);
-//  player.displayInventory(1000.0, 600.0);
-//=======
-//}
 
 void text_render () {
   textSize(128);
@@ -89,7 +65,7 @@ void win_text () {
   text("You Won!", center.x, center.y - 100);
   textSize(64);
   text("Press R to reload or regenerate", center.x, center.y + 100);
-  text("Press Q to exit", center.x, center.y - 100);
+  text("Press Q to exit", center.x, center.y + 200);
 }
 
 void draw () {
@@ -159,21 +135,16 @@ void draw () {
       fill(0);
       pushMatrix();
         translate(-1, -1);
-        //text_render();
         death_text();
         translate(2, 0);
-        //text_render();
         death_text();
         translate(0, 2);
-        //text_render();
         death_text();
         translate(-2, 0);
-        //text_render();
         death_text();
       popMatrix();
       // White Text
       fill(255, 50, 50);
-      //text_render();
       death_text();
       break;
     }
@@ -189,24 +160,17 @@ void draw () {
       fill(0);
       pushMatrix();
         translate(-1, -1);
-        //text_render();
         win_text();
         translate(2, 0);
-        //text_render();
         win_text();
         translate(0, 2);
-        //text_render();
         win_text();
         translate(-2, 0);
-        //text_render();
         win_text();
       popMatrix();
-      // White Text
-      fill(255, 50, 50);
-      //text_render();
+      fill(255, 255, 0);
       win_text();
       break;
-      
     }
   }  
 }
