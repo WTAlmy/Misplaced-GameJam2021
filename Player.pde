@@ -49,7 +49,7 @@ public class Player extends Plottable {
   }
   
   public void playerWin(){
-    if (wood.count == 30 && bottles.count == 15){
+    if (wood.count >= 30 && bottles.count >= 15){
       PROGRAM_STATE = 3;
     }
   }
