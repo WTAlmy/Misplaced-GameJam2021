@@ -1,6 +1,6 @@
 public class Palmtree extends Plottable {
-  float size;
-  PImage palmtreeImage;
+  public float size;
+  public PImage palmtreeImage;
   
   Palmtree(PVector pos, float radius) {
     super(pos, radius);

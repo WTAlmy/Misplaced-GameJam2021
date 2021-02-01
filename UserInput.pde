@@ -21,7 +21,6 @@ void keyPressed() {
 
   // Collect Item
   if (key == 'e') {
-    
     // Collecting logs
     for (int i = wood.instances.size() - 1; i >= 0; i--) {
       if (player.touching(wood.instances.get(i))) {

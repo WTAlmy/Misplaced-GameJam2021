@@ -15,6 +15,9 @@ void settings () {
   size(1200, 800, P2D);
   pixelDensity(2);
   file = new SoundFile(this, "waves.mp3");
+  jellySound = new SoundFile(this, "electricshock.mp3");
+  sharkSound = new SoundFile(this, "sharkSound.mp3");
+  playerDeathSound = new SoundFile(this, "deathSound.mp3");
   background_image = loadImage("seamless.jpg");
   center = new PVector(width/2, height/2);
   
@@ -26,10 +29,10 @@ void settings () {
 }
 
 void setup () {
-  frameRate(120);
+  frameRate(60);
   imageMode(CENTER);
   file.amp(0.3);
-  file.play();
+  file.loop();
 }
 
 void draw () {
@@ -45,6 +48,7 @@ void draw () {
   render_islands(islands);
   player.update();
   player.render();
+  player.attacked();
   renderResources();
   noFill();
   stroke(255);

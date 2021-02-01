@@ -1,6 +1,9 @@
 public static final int SHARK = 0;
 public static final int JELLY = 1;
 
+SoundFile jellySound;
+SoundFile sharkSound;
+
 PImage shark_sheet;
 PImage shark_frame[] = new PImage[7];
 
@@ -12,12 +15,13 @@ public ArrayList<Hostile> hostiles;
 public class Hostile extends Plottable {
 
   private int type;
-  
+
   private float angle;
   private float angle_start;
   private float target_angle;
-  
+
   private float x_movement = 1;
+  private SoundFile attackSound;
 
   Hostile (int type, PVector pos) {
     super(pos);
@@ -25,6 +29,19 @@ public class Hostile extends Plottable {
     this.angle = random(0, TWO_PI);
     this.angle_start = millis();
     this.target_angle = random(0, TWO_PI);
+
+    switch (this.type) {
+    case SHARK: 
+      {
+        this.attackSound = sharkSound;
+      } 
+      break;
+    case JELLY: 
+      {
+        this.attackSound = jellySound;
+      } 
+      break;
+    }
   }
 
   Hostile (int type, PVector pos, float radius) {
@@ -33,31 +50,47 @@ public class Hostile extends Plottable {
     this.angle = random(0, TWO_PI);
     this.angle_start = millis();
     this.target_angle = random(0, TWO_PI);
+    switch (this.type) {
+    case SHARK: 
+      {
+        this.attackSound = sharkSound;
+      } 
+      break;
+    case JELLY: 
+      {
+        this.attackSound = jellySound;
+      } 
+      break;
+    }
   }
 
   public float getSize () {
     return 32;
   }
   
+  public void playSound(){
+    this.attackSound.play();
+  }
+
   private void newAngle () {
     this.angle = target_angle;
     this.angle_start = float(millis());
     this.target_angle = random(0, TWO_PI);
   }
-  
+
   private PVector lerpAngle(float i) {
     PVector va = PVector.fromAngle(this.angle);
     PVector vb = PVector.fromAngle(this.target_angle);
     return va.lerp(vb, i).normalize();
   }
-  
+
   public void update () {
     float delta = (float(millis()) - angle_start) / 1000.0;
     if (delta > 5) newAngle();
     PVector movement = this.lerpAngle(delta).mult(2).mult(hostile_lum);
     this.move(movement);
     this.x_movement = movement.x;
-    if (this.getPosition().dist(new PVector(0,0)) > 2000) {
+    if (this.getPosition().dist(new PVector(0, 0)) > 2000) {
       super.pos = new PVector(0, 0);
     }
   } 
@@ -65,29 +98,33 @@ public class Hostile extends Plottable {
   public void render () {
     PVector loc = this.getRelativePos();
     switch (this.type) {
-    case SHARK: {
-      int frame = int(frameCount * 0.2) % 7;
-      if (this.x_movement > 0) {
-        image(shark_frame[frame], loc.x, loc.y, this.getSize(), this.getSize());
-      } else {
-        pushMatrix();
-        scale(-1, 1);
-        image(shark_frame[frame], -loc.x, loc.y, this.getSize(), this.getSize());
-        popMatrix();
+    case SHARK: 
+      {
+        int frame = int(frameCount * 0.2) % 7;
+        if (this.x_movement > 0) {
+          image(shark_frame[frame], loc.x, loc.y, this.getSize(), this.getSize());
+        } else {
+          pushMatrix();
+          scale(-1, 1);
+          image(shark_frame[frame], -loc.x, loc.y, this.getSize(), this.getSize());
+          popMatrix();
+        }
+        break;
+      } 
+    case JELLY: 
+      {
+        int frame = int(frameCount * 0.2) % 9;
+        if (this.x_movement > 0) {
+          image(jelly_frame[frame], loc.x, loc.y, this.getSize(), this.getSize());
+        } else {
+          pushMatrix();
+          scale(-1, 1);
+          image(jelly_frame[frame], -loc.x, loc.y, this.getSize(), this.getSize());
+          popMatrix();
+        }
+        break;
       }
-      break;
-    } case JELLY: {
-      int frame = int(frameCount * 0.2) % 9;
-      if (this.x_movement > 0) {
-        image(jelly_frame[frame], loc.x, loc.y, this.getSize(), this.getSize());
-      } else {
-        pushMatrix();
-        scale(-1, 1);
-        image(jelly_frame[frame], -loc.x, loc.y, this.getSize(), this.getSize());
-        popMatrix();
-      }
-      break;
-    }}
+    }
   }
 }
 

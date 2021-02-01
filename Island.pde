@@ -4,14 +4,16 @@ public class Island extends Plottable {
 
   private float size;
   private int numPalmtrees;
-  public float borderSize;
+  public float beachSize;
+  public float inlandSize;
 
   Island(PVector pos, float radius) {
     super(pos, radius);
-    this.size = random(80, 150);
+    this.inlandSize = random(80, 150);
+    this.beachSize = random(this.inlandSize/6, this.inlandSize/4);
+    this.size = inlandSize + beachSize;
     palmtrees = new ArrayList<Palmtree>();
     this.numPalmtrees = int(random(3, 7));
-    this.borderSize = random(this.getSize()/6, this.getSize()/4);
   }
 
   // access 
@@ -42,7 +44,7 @@ public class Island extends Plottable {
     noStroke();
     PVector pos = this.getRelativePos();
     fill(245 * island_lum, 235 * island_lum, 214 * island_lum);
-    circle(pos.x, pos.y, this.getSize());
+    circle(pos.x, pos.y, this.inlandSize);
   }
 
   // render teal water color under island and beach
@@ -50,9 +52,8 @@ public class Island extends Plottable {
     noStroke();
     PVector pos = this.getRelativePos();
     fill(93 * island_lum, 206 * island_lum, 231 * island_lum);
-    float waterBorder = this.getSize() + this.borderSize;
     float wave = sin(float(millis()) / 1500.0);
-    circle(pos.x, pos.y, waterBorder + abs(wave)*20);
+    circle(pos.x, pos.y, this.getSize() + abs(wave)*20);
   }
 
   // render light color border behind island
@@ -60,7 +61,7 @@ public class Island extends Plottable {
     noStroke();
     PVector pos = this.getRelativePos();
     fill(253 * island_lum, 251 * island_lum, 249 * island_lum);
-    circle(pos.x, pos.y, this.getSize() + this.borderSize);
+    circle(pos.x, pos.y, this.getSize());
   }
 
   // render all palmtrees belonging to island

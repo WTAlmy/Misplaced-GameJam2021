@@ -57,7 +57,6 @@ class BottleInstance extends ResourceInstance {
   }
 
   public void render() {
-    println("got here");
     float floatVal = sin(millis()/600.0);
     PImage img = bottles.getImage();
     PVector pos = this.getRelativePos();

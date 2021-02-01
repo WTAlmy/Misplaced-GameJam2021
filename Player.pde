@@ -1,9 +1,11 @@
 Player player = new Player(new PVector(0, 0));
+SoundFile playerDeathSound;
 
 public class Player extends Plottable {
 
   private float size;
   public int life;
+  public SoundFile deathSound;
 
   Player(PVector pos) {
     super(pos);
@@ -25,15 +27,28 @@ public class Player extends Plottable {
     float magnitude = constrain(map(movement.mag(), 20, 150, 0, 100), 0, 100);
     PVector direction = movement.normalize().mult(magnitude * terrainMulti);
     this.move(direction);
-    
   }
 
-  public void status() {
-    if (this.life <= 0) {
-      println("PLAYER DIED");
-      exit();
+  public void attacked() {
+    if (onWater()) {
+      for (Hostile hostile : hostiles) {
+        if (player.touching(hostile)) {
+          println("Player attacked by ", hostile.type);
+          hostile.playSound();
+          delay(1000);
+          playerDeathSound.play();
+          this.playerDeath();
+        }
+      }
     }
   }
+
+  public void playerDeath() {
+    println("PLAYER DIED");
+    delay(7000);
+    exit(); 
+  }
+
 
   public void displayInventory(float x, float y) {
     textSize(16);
