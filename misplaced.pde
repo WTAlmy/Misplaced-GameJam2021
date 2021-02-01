@@ -121,17 +121,17 @@ void draw () {
       fill(0);
       pushMatrix();
         translate(-1, -1);
-        text_render();
+        death_text();
         translate(2, 0);
-        text_render();
+        death_text();
         translate(0, 2);
-        text_render();
+        death_text();
         translate(-2, 0);
-        text_render();
+        death_text();
       popMatrix();
       // White Text
       fill(255, 50, 50);
-      text_render();
+      death_text();
       break;
     }
   }

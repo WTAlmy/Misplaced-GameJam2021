@@ -5,7 +5,7 @@ void keyPressed() {
     settings();
   }
   
-  if (key == 'd') {
+  if (key == 'p') {
     PROGRAM_STATE = 2;
   }
   
