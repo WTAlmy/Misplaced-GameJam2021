@@ -1,6 +1,14 @@
 int value;
 void keyPressed() {
 
+  if (key == 'r') {
+    settings();
+  }
+  
+  if (key == 'd') {
+    PROGRAM_STATE = 2;
+  }
+  
   // Interact with item
   if (key == 'f') {
     
@@ -21,6 +29,8 @@ void keyPressed() {
 
   // Collect Item
   if (key == 'e') {
+    
+    PROGRAM_STATE++;
     
     // Collecting logs
     for (int i = wood.instances.size() - 1; i >= 0; i--) {
