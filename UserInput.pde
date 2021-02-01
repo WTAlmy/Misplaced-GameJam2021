@@ -1,6 +1,14 @@
 int value;
 void keyPressed() {
 
+  if (key == 'r') {
+    settings();
+  }
+  
+  //if (key == 'd') {
+  //  PROGRAM_STATE = 2;
+  //}
+  
   // Interact with item
   if (key == 'f') {
     
@@ -18,7 +26,12 @@ void keyPressed() {
       }
     }
   }
-
+  
+  // enter game from menu screen
+  if (key == 'e' && PROGRAM_STATE == 0){
+    PROGRAM_STATE = 1;
+  }
+  
   // Collect Item
   if (key == 'e') {
     // Collecting logs
@@ -40,5 +53,9 @@ void keyPressed() {
         break;
       }
     }
+  }
+
+  if (key == 'q' && PROGRAM_STATE > 1){
+    exit();
   }
 }

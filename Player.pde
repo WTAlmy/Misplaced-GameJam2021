@@ -35,20 +35,26 @@ public class Player extends Plottable {
         if (player.touching(hostile)) {
           println("Player attacked by ", hostile.type);
           hostile.playSound();
-          delay(1000);
-          playerDeathSound.play();
           this.playerDeath();
         }
       }
     }
   }
-
+  
   public void playerDeath() {
+    playerDeathSound.play();
     println("PLAYER DIED");
-    delay(7000);
-    exit(); 
+    PROGRAM_STATE = 2; 
   }
-
+  
+  public void playerWin(){
+    if (wood.count == 30 && bottles.count == 15){
+      PROGRAM_STATE = 3;
+    }
+    if (wood.count == 1){
+      PROGRAM_STATE = 3;
+    }
+  }
 
   public void displayInventory(float x, float y) {
     textSize(16);
